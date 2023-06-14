@@ -14,11 +14,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var choice1Button: UIButton!
     @IBOutlet weak var choice2Button: UIButton!
     
+    var storyBrain = StoryBrain()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        storyLabel.text = storyBrain.stories[storyBrain.storyNumber].title
+        choice1Button.setTitle(storyBrain.stories[storyBrain.storyNumber].choice1, for: .normal)
+        choice2Button.setTitle(storyBrain.stories[storyBrain.storyNumber].choice2, for: .normal)
 
     }
 
-
+    @IBAction func choiceMade(_ sender: UIButton) {
+        switch sender {
+        case choice1Button:
+            storyBrain.nextStory(userChoice: "choice1Button")
+            updateUI()
+        case choice2Button:
+            storyBrain.nextStory(userChoice: "choice2Button")
+            updateUI()
+        default:
+            print("unknown button pressed")
+        }
+    }
+    
+    func updateUI(){
+        storyLabel.text = storyBrain.stories[storyBrain.storyNumber].title
+        choice1Button.setTitle(storyBrain.stories[storyBrain.storyNumber].choice1, for: .normal)
+        choice2Button.setTitle(storyBrain.stories[storyBrain.storyNumber].choice2, for: .normal)
+    }
+    
 }
 
